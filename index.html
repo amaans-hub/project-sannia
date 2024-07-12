@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="heart.png" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Sannia</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Quicksand', cursive;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            background-color: #f0e6fa;
+            background-image: 
+                radial-gradient(circle at top left, #f0e6fa, #e2dafc),
+                radial-gradient(circle at bottom right, #d4c1f4, #a390f0);
+            background-attachment: fixed;
+            position: relative;
+        }
+        
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                url("data:image/svg+xml,%3Csvg width='52' height='26' viewBox='0 0 52 26' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23a390f0' fill-opacity='0.1'%3E%3Cpath d='M10 10c0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6h2c0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4v2c-3.314 0-6-2.686-6-6 0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6zm25.464-1.95l8.486 8.486-1.414 1.414-8.486-8.486 1.414-1.414z' /%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 1;
+            z-index: -1;
+        }
+        h1, h2{
+            font-family: 'Pacifico', cursive;
+        }
+        h3 {
+            margin-bottom: 0;
+        }
+        .cursive {
+            font-family: "Pacifico";
+        }
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: #a390f0;
+            padding: 10px 0;
+            text-align: center;
+            z-index: 1000;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0 15px;
+            font-weight: bold;
+        }
+        nav a.active {
+            color: #503a64;
+            opacity: 50%;
+        }
+        nav a:hover{
+            opacity: 50%;
+        }
+        .container {
+            max-width: 800px;
+            width: 100%;
+            margin-top: 60px;
+            margin-bottom: 20px;
+            border: 2px solid #a390f0;
+            border-radius: 15px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        section {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        section:nth-child(even) {
+            background-color: #d4c1f4;
+        }
+        section:nth-child(odd) {
+            background-color: #e2dafc;
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+        .content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        li {
+            padding: 0 30px;
+        }
+        .fade-in {
+            opacity: 0;
+            transition: opacity 2s;
+        }
+        .photo-gallery {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+        .photo-item {
+            width: 30%;
+            margin-bottom: 20px;
+        }
+        .photo-item img {
+            width: 100%;
+            border-radius: 10px;
+            transition: transform 0.3s ease-in-out;
+        }
+        
+        .photo-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .last-photo{
+            transition: none;
+        }
+
+        .last-photo:hover img{
+            transform: none;
+        }
+        .button {
+            background-color: #a390f0;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .button:hover {
+            background-color: #8a73d9;
+        }
+        #heart-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+        }
+        .big-question {
+            font-size: 2em;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+        
+        .yes-button {
+            background-color: #ff69b4;
+            margin-right: 10px;
+        }
+        
+        .no-button {
+            background-color: #808080;
+        }
+        
+        #question-container {
+            margin-top: 20px;
+        }
+
+        #last-img-container {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+        }
+        
+        #response {
+            margin-top: 20px;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#the-story">The Story</a>
+            <a href="#admire">I Admire</a>
+            <a href="#memories">Memories</a>
+            <a href="#reasons">Reasons Why</a>
+            <a href="#question">Well...</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <section id="home">
+            <div class="content">
+                <h1 class="fade-in">Hello, Sannia ❤️</h1>
+                <p class="fade-in">I might have something to share with you...</p>
+            </div>
+        </section>
+
+        <section id="the-story">
+            <div class="content">
+                <h1>The Story</h1>
+                <div id="story-timeline">
+                    <div class="timeline-item">
+                        <h3>When we first met</h3>
+                        <p>You looked so pretty on eid. Then, I decided to be a <span class="cursive">✨sharabi✨</span>. <br> And then the <span class="cursive">funny</span> happened.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h3>Redemption arc hahaha</h3>
+                        <p>The hike was nice, you waiting for me after the event was really nice. <br> And <span class="cursive">everything</span> since has been nothing short of amazing.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h3>The Moment I Knew</h3>
+                        <p>It hit me like a ton of bricks when I had me missing you while I was supposed to be having <span class="cursive">✨fun✨</span> with a group of people.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="admire">
+            <div class="content">
+                <h1>Things I Admire About You</h1>
+                <ul id="admire-list">
+                    <li>Your beautiful <span class="cursive">smile</span> that brightens my day</li>
+                    <li>The way you <span class="cursive">laugh</span> so loud at my stupidest jokes</li>
+                    <li>Every small <span class="cursive">effort</span> you do to make me feel better</li>
+                    <li>The way you make me feel safe and <span class="cursive">understood</span></li>
+                    <li>How much you think and <span class="cursive">care</span> about the people you love</li>
+                    <li>The way you make me want to just <span class="cursive">look</span> at you and do nothing else
+                    <br>and a <span class="cursive">million</span> other things...</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="memories">
+            <div class="content">
+                <h1>Some of Our Memories</h1>
+                <div class="photo-gallery">
+                    <div class="photo-item">
+                        <img src="img1.jpg" alt="Memory 1">
+                        <p>The <span class="cursive">first date</span></p>
+                    </div>
+                    <div class="photo-item">
+                        <img src="img4.jpg" alt="Memory 2">
+                        <p>Making Rija <span class="cursive">third wheel</span></p>
+                    </div>
+                    <div class="photo-item">
+                        <img src="img3.jpg" alt="Memory 3">
+                        <p>Our <span class="cursive">khaufnak hasi</span></p>
+                    </div>
+                </div>
+                <p>And <span class="cursive">so much</span> more to come...</p>
+            </div>
+        </section>
+
+        <section id="reasons">
+            <div class="content">
+                <h1>Reasons Why</h1>
+                <p><span class="cursive">Because...</span></p>
+                <ul>
+                    <li>You make me want to be the best version of myself</li>
+                    <li>Our conversations never get boring</li>
+                    <li>You are prettier than the prettiest sunset sky</li>
+                    <li>We share the same weird sense of humor</li>
+                    <li>The way you look at me makes me feel like I'm the only person in the world</li>
+                </ul>
+                <p>And <span class="cursive">countless</span> more reasons that I discover <span class="cursive">daily</span></p>
+            </div>
+        </section>
+
+        <section id="question">
+            <div class="content">
+                <h1>Well, Well...</h1>
+                <p class="fade-in">Sannia, you've made my life brighter in so many ways...</p>
+                <button id="reveal-question" class="button fade-in">So ...</button>
+                <div id="question-container" style="display: none;">
+                    <p class="big-question fade-in">Will you be my <span class="cursive">girlfriend?</span></p>
+                    <div id="answer-buttons">
+                        <button class="button yes-button" onclick="answer('yes')">Yes! ❤️</button>
+                        <button class="button no-button" onclick="answer('no')">Not right now</button>
+                    </div>
+                </div>
+                <p id="response" class="fade-in"></p>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('nav a');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= sectionTop - 60) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').slice(1) === current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        function fadeInElements() {
+            const elements = document.querySelectorAll('.fade-in');
+            elements.forEach(element => {
+                const rect = element.getBoundingClientRect();
+                if (rect.top <= window.innerHeight) {
+                    element.style.opacity = 1;
+                }
+            });
+        }
+        document.getElementById('reveal-question').addEventListener('click', function() {
+            this.style.display = 'none';
+            document.getElementById('question-container').style.display = 'block';
+        });
+
+        var notRn = false;
+        
+        function answer(response) {
+            const answerElement = document.getElementById('response');
+            const questionContainer = document.getElementById('question-container');
+            
+            
+            if (response === 'yes') {
+                questionContainer.style.display = 'none';
+                answerElement.textContent = "That's what I thought! 😎😎😎";
+                answerElement.style.color = '#ff69b4';
+                triggerCelebration();
+            } else {
+                if(!notRn){
+                    questionContainer.innerHTML = "<div id=last-img-container><div class=\"photo-item last-photo\"><img src=\"img2.jpg\" alt=\"Memory 2\"><strong>Think again</strong></div></div>"+questionContainer.innerHTML;
+                    answerElement.style.color = '#808080';
+                    document.querySelector(".no-button").style.display = 'none'
+                }
+                notRn = true
+            }
+            
+            answerElement.style.display = 'block';
+        }
+        
+        function triggerCelebration() {
+            triggerConfetti();
+        }
+        
+        function triggerConfetti() {
+            const duration = 15 * 1000,
+            animationEnd = Date.now() + duration,
+            defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+        
+            function randomInRange(min, max) {
+                return Math.random() * (max - min) + min;
+            }
+        
+            const interval = setInterval(function() {
+                const timeLeft = animationEnd - Date.now();
+        
+                if (timeLeft <= 0) {
+                    return clearInterval(interval);
+                }
+        
+                const particleCount = 50 * (timeLeft / duration);
+                
+                confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } }));
+                confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } }));
+            }, 250);
+        }
+
+        window.addEventListener('scroll', fadeInElements);
+        fadeInElements();
+    </script>
+</body>
+</html>
